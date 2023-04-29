@@ -1,5 +1,8 @@
 from draw_board_class import board_class
 import time
+import numpy as np
+from numpy import random as rd
+import random
 
 class Field:
     def __init__(self, size, item_pickup, start_position, item_drop_off):
@@ -216,25 +219,5 @@ class Q_Learning():
     def evaluate_rl_with_epsilon_factor(self):
         pass # buraya epsilon faktörü eklenicek, yani explore edebilecek. Original train epsilonundan daha dusuk bir deger kullanilabilir
 
-import numpy as np
-from numpy import random as rd
-import random
 
-_size = 10
-_item_start = (0, 0)
-_start_position = (0, 9)
-_item_drop_off = (9, 9)
-
-train_q = Q_Learning(_size, _item_start, _start_position, _item_drop_off, True)
-
-# train_q.train_q_learning()
-
-q_table = np.load("C:/Users/sesle/Desktop/Workspace/ReinforcementLearning/Github/q-learning/trained_q_tables/q_table_200bin.npy")  # onceden egitilen q_table load edilir
-train_q.evaluate_rl(q_table, True)
-
-train_q.evaluate_rl(q_table, True)
-train_q.evaluate_rl(q_table, True)
-
-# print(evaluate_new_reinforcement_learning())
-# print(evaluate_reinforcement_learning())
 
