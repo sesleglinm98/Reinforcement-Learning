@@ -1,7 +1,6 @@
 from draw_board_class import board_class
 import time
 import numpy as np
-from numpy import random as rd
 import random
 
 class Field:
@@ -15,19 +14,20 @@ class Field:
         # self.board = board_class()
 
     def get_number_of_states(self):  # toplam kac tane durumun oldugunu dondurur
-        return self.size*self.size*self.size*self.size*2 # 2 tane self.size tasiyicinin bulunabilecegi durumlar, 2 tane self.size itemin bulunabilecegi durumlar
+        return self.size*self.size*self.size*self.size*self.size*self.size*2 # 2 tane self.size tasiyicinin bulunabilecegi durumlar, 2 tane self.size itemin bulunabilecegi durumlar
         # carpi 2 ise itemin alinip alinmama durumu icin
-        # birakilacak alanin durumlari carpima alinmadi, sebebi sanirim bu alan hareket edemiyor sabit bir yer oldugu icin
-        # ama bu alaninda hesaba katildigi hesaplama yapilip sonuclari gozlenebilir
+        # 2 tane daha self.size eklendi item_drop_off degisik pozisyonlara koyabilmek icin
 
     def get_state(self):
         # burada yapilan islem belli bir zamanda hangi durumda oldugunun hesaplanmasidir
         # durumun hesaplanmasi bire bir mapping gibi dusunulebilir, her bir durum her bir sayi ile ifade ediliyor
         # bu mapping islemi icinde asagidaki gibi bir hesaplama yapiliyor ve boylece her durumun bir sayi karsiligi oluyor
-        state = self.position[0] * self.size * self.size * self.size * 2
-        state = state + self.position[1] * self.size * self.size * 2
-        state = state + self.item_pickup[0] * self.size * 2
-        state = state + self.item_pickup[1] * 2
+        state = self.position[0] * self.size * self.size * self.size * self.size * self.size * 2
+        state = state + self.position[1] * self.size * self.size * self.size * self.size * 2
+        state = state + self.item_pickup[0] * self.size * self.size * self.size * 2
+        state = state + self.item_pickup[1] * self.size * self. size * 2
+        state = state + self.item_drop_off[0] * self.size * 2
+        state = state + self.item_drop_off[1] * 2
         if self.item_in_car:  # itemin alinmis olmasi durumu icin
             state = state + 1
         # alinmamasi durumunu yazmaya gerek yok cunku 0 ile toplayip birsey degismeyecekti
@@ -89,9 +89,10 @@ class Q_Learning():
         self.randomize = randomize
 
     def random_position(self):
-        # self.item_start = rd.randint(9, size=(2))
         self.item_start = (random.randint(0, 9), random.randint(0, 9))
         self.start_position = (random.randint(0, 9), random.randint(0, 9))
+
+        self.item_drop_off = (random.randint(0, 9), random.randint(0, 9))
 
     # implementing q-learning algorithm
     def train_q_learning(self):
@@ -112,7 +113,7 @@ class Q_Learning():
         alpha = 0.1    # learning rate
         gamma = 0.6
 
-        for i in range(200000):
+        for i in range(400000):
             if self.randomize:
                 self.random_position()
                 # print("item_start:: ", self.item_start)
@@ -152,12 +153,12 @@ class Q_Learning():
                     # time.sleep(0.5)
                     # self.evaluate_new_reinforcement_learning(i)
 
-            if i % 5000 == 0 and i != 0:
+            if i % 1000 == 0 and i != 0:
                 print("i: ", i, "step_number: ", step_number)
                 print("field.position coordinates: ", field.position)
                 # self.evaluate_rl_while_training(i)
 
-        np.save("C:/Users/sesle/Desktop/Workspace/ReinforcementLearning/Github/q-learning/trained_q_tables/q_table_200bin.npy", self.q_table) # egitilen q_table save edilir
+        np.save("C:/Users/sesle/Desktop/Workspace/ReinforcementLearning/Github/q-learning/trained_q_tables/q_table_400bin.npy", self.q_table) # egitilen q_table save edilir
 
     def evaluate_rl_while_training(self, i):  # onceki evaluate fonksiyonunun egitim kisimlarinin ve random ilerlemesinin cikarilmis hali
         
@@ -186,8 +187,8 @@ class Q_Learning():
         self.board.reset()
         return step_number
     
-    def evaluate_rl(self, trained_q_table, randomize):
-        if randomize:
+    def evaluate_rl(self, trained_q_table, random_position, random_movement):
+        if random_position:
             self.random_position()
         field = Field(self.size, self.item_start, self.start_position, self.item_drop_off)
         self.board = board_class(self.item_start, self.start_position, self.item_drop_off)
@@ -196,28 +197,30 @@ class Q_Learning():
         step_number = 0  # olayi kac adimda tamamladigini tutar
         i = 0
 
+        epsilon = 0.1
         while not done:
             step_number = step_number + 1
-
             state = field.get_state()
 
-            # print("q_table[state]: ", q_table[0])
-            action = np.argmax(trained_q_table[state])
+            if random_movement:
+                if random.uniform(0, 1) < epsilon:  # 0-1 arasi random sayi secilir, epsilon degeri ile kiyaslanir
+                    action = random.randint(0, 5)  # random bir aksiyon secilir
+                else:
+                    action = np.argmax(trained_q_table[state])
+            else:
+                action = np.argmax(trained_q_table[state])
+                if step_number >= 100:  # algoritmanin takili kalmasini onlemek icin, yoksa sonsuz kadar hep ayni hareketi tekrarliyor
+                    print("fail")
+                    done = True
 
             reward, done = field.make_action(action)
 
             self.board.write_info(i, step_number, action)
             self.board.move_carrier_upgraded(action, field.item_in_car, field.position[0], field.position[1])
             time.sleep(0.1)
-            if step_number >= 100:  # algoritmanin takili kalmasini onlemek icin, yoksa sonsuz kadar hep ayni hareketi tekrarliyor
-                print("fail")
-                done = True
 
         self.board.reset()
         return step_number
-    
-    def evaluate_rl_with_epsilon_factor(self):
-        pass # buraya epsilon faktörü eklenicek, yani explore edebilecek. Original train epsilonundan daha dusuk bir deger kullanilabilir
 
 
 

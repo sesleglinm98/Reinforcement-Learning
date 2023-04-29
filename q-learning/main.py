@@ -10,11 +10,11 @@ train_q = Q_Learning(_size, _item_start, _start_position, _item_drop_off, True)
 
 # train_q.train_q_learning()
 
-q_table = np.load("C:/Users/sesle/Desktop/Workspace/ReinforcementLearning/Github/q-learning/trained_q_tables/q_table_200bin.npy")  # onceden egitilen q_table load edilir
-train_q.evaluate_rl(q_table, True)
+q_table = np.load("C:/Users/sesle/Desktop/Workspace/ReinforcementLearning/Github/q-learning/trained_q_tables/q_table_400bin.npy")  # onceden egitilen q_table load edilir
 
-train_q.evaluate_rl(q_table, True)
-train_q.evaluate_rl(q_table, True)
+train_q.evaluate_rl(q_table, True, True)
+train_q.evaluate_rl(q_table, True, True)
+train_q.evaluate_rl(q_table, True, True)
 
 # print(evaluate_new_reinforcement_learning())
 # print(evaluate_reinforcement_learning())
