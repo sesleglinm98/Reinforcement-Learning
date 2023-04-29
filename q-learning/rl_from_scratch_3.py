@@ -154,7 +154,7 @@ class Q_Learning():
                 print("field.position coordinates: ", field.position)
                 # self.evaluate_rl_while_training(i)
 
-        np.save("C:/Users/sesle/Desktop/Workspace/ReinforcementLearning/Scratch-Tutorials/Learn-Python-with-Rune/q_table_200bin.npy", self.q_table) # egitilen q_table save edilir
+        np.save("C:/Users/sesle/Desktop/Workspace/ReinforcementLearning/Github/q-learning/trained_q_tables/q_table_200bin.npy", self.q_table) # egitilen q_table save edilir
 
     def evaluate_rl_while_training(self, i):  # onceki evaluate fonksiyonunun egitim kisimlarinin ve random ilerlemesinin cikarilmis hali
         
@@ -229,7 +229,7 @@ train_q = Q_Learning(_size, _item_start, _start_position, _item_drop_off, True)
 
 # train_q.train_q_learning()
 
-q_table = np.load("C:/Users/sesle/Desktop/Workspace/ReinforcementLearning/Scratch-Tutorials/Learn-Python-with-Rune/q_table_200bin.npy")  # onceden egitilen q_table load edilir
+q_table = np.load("C:/Users/sesle/Desktop/Workspace/ReinforcementLearning/Github/q-learning/trained_q_tables/q_table_200bin.npy")  # onceden egitilen q_table load edilir
 train_q.evaluate_rl(q_table, True)
 
 train_q.evaluate_rl(q_table, True)
