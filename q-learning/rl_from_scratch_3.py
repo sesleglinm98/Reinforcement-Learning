@@ -92,7 +92,7 @@ class Q_Learning():
         self.item_start = (random.randint(0, 9), random.randint(0, 9))
         self.start_position = (random.randint(0, 9), random.randint(0, 9))
 
-        self.item_drop_off = (random.randint(0, 9), random.randint(0, 9))
+        # self.item_drop_off = (random.randint(0, 9), random.randint(0, 9))
 
     # implementing q-learning algorithm
     def train_q_learning(self):
@@ -113,7 +113,7 @@ class Q_Learning():
         alpha = 0.1    # learning rate
         gamma = 0.6
 
-        for i in range(400000):
+        for i in range(3000000):
             if self.randomize:
                 self.random_position()
                 # print("item_start:: ", self.item_start)
@@ -158,7 +158,7 @@ class Q_Learning():
                 print("field.position coordinates: ", field.position)
                 # self.evaluate_rl_while_training(i)
 
-        np.save("C:/Users/sesle/Desktop/Workspace/ReinforcementLearning/Github/q-learning/trained_q_tables/q_table_400bin.npy", self.q_table) # egitilen q_table save edilir
+        np.save("C:/Users/sesle/Desktop/Workspace/ReinforcementLearning/Github/q-learning/trained_q_tables/q_table_3milyon.npy", self.q_table) # egitilen q_table save edilir
 
     def evaluate_rl_while_training(self, i):  # onceki evaluate fonksiyonunun egitim kisimlarinin ve random ilerlemesinin cikarilmis hali
         
@@ -197,7 +197,7 @@ class Q_Learning():
         step_number = 0  # olayi kac adimda tamamladigini tutar
         i = 0
 
-        epsilon = 0.1
+        epsilon = 0.2
         while not done:
             step_number = step_number + 1
             state = field.get_state()
@@ -214,6 +214,10 @@ class Q_Learning():
                     done = True
 
             reward, done = field.make_action(action)
+            if action == 4:
+                self.board.pickup_acion()
+            elif action == 5:
+                self.board.drop_off_action()
 
             self.board.write_info(i, step_number, action)
             self.board.move_carrier_upgraded(action, field.item_in_car, field.position[0], field.position[1])
@@ -221,6 +225,3 @@ class Q_Learning():
 
         self.board.reset()
         return step_number
-
-
-

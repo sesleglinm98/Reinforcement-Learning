@@ -45,7 +45,15 @@ class board_class():
 
         self.write_turtle = turtle.Turtle()
         self.write_turtle.hideturtle()
-        
+
+        # adding images on board
+        path = "C:/Users/sesle/Desktop/Workspace/ReinforcementLearning/Scratch-Tutorials/create-your-rl-environment/"
+        turtle.addshape(path + "edited-apple.gif")
+        turtle.addshape(path + "funny-cat-hug-edited.gif")
+        turtle.addshape(path + "home2.gif")
+        turtle.addshape(path + "applecatrun-apple-cat.gif")
+        turtle.addshape(path + "winner-home.gif")
+
         turtle.speed(0)  # cizim hizini ayarlar, 0 en hizlisi
         turtle.hideturtle() # cizim okunu gorunmez yapar
         turtle.tracer(0) # bunun ile animasyon devre disi birakilir, bu olmadiginda tum cizimler animasyon seklinde cizilir
@@ -66,21 +74,24 @@ class board_class():
                 turtle.end_fill()
 
         self.carrier_turtle.speed(2)
-        self.carrier_turtle.shape('circle')
+        # self.carrier_turtle.shape('circle')
+        self.carrier_turtle.shape(path + "funny-cat-hug-edited.gif")
         self.carrier_turtle.color('black')
         self.carrier_turtle.penup()
         self.carrier_turtle.goto(self.carrier_x, self.carrier_y)
         self.carrier_turtle.shapesize(2, 2)
 
         self.item_turtle.speed(0)
-        self.item_turtle.shape('circle')
+        # self.item_turtle.shape('circle')
+        self.item_turtle.shape(path + "edited-apple.gif")
         self.item_turtle.color('red')
         self.item_turtle.penup()
         self.item_turtle.goto(self.item_x, self.item_y)
         self.item_turtle.shapesize(2, 2)
         
         self.drop_region_turtle.speed(0)
-        self.drop_region_turtle.shape('circle')
+        # self.drop_region_turtle.shape('circle')
+        self.drop_region_turtle.shape(path + "home2.gif")
         self.drop_region_turtle.color('green')
         self.drop_region_turtle.penup()
         self.drop_region_turtle.goto(self.drop_region_x, self.drop_region_y)
@@ -147,18 +158,24 @@ class board_class():
 
     def pickup_acion(self):
         if self.item_turtle.position() == self.carrier_turtle.position():
-            self.item_turtle.shapesize(1, 1)
+            # self.item_turtle.shapesize(1, 1)
+            path = "C:/Users/sesle/Desktop/Workspace/ReinforcementLearning/Scratch-Tutorials/create-your-rl-environment/"
+            self.carrier_turtle.shape(path + "applecatrun-apple-cat.gif")
             self.picked_up_item = True
+            self.item_turtle.hideturtle()
 
     def drop_off_action(self):
+        path = "C:/Users/sesle/Desktop/Workspace/ReinforcementLearning/Scratch-Tutorials/create-your-rl-environment/"
         if self.item_turtle.position() == self.drop_region_turtle.position(): # itemin droppoff bolgesinde birakilmasi durumu
             self.carrier_turtle.hideturtle()
-
-            turtle.done() # dikkat et bunun cikarilmasi gerekebilir
-
+            self.item_turtle.hideturtle()
+            self.drop_region_turtle.shape(path + "winner-home.gif")
+            # turtle.done() # dikkat et bunun cikarilmasi gerekebilir
         else:
             self.picked_up_item = False
-            self.item_turtle.shapesize(2, 2)
+            # self.item_turtle.shapesize(2, 2)
+            self.carrier_turtle.shape(path + "funny-cat-hug-edited.gif")
+            self.item_turtle.showturtle()
 
     def write_info(self, iteration, step, action):
         # self.score.write("Hit: {}   Missed: {}".format(self.hit, self.miss), align='center', font=('Courier', 24, 'normal'))
@@ -189,49 +206,17 @@ class board_class():
     def reset(self):
         turtle.resetscreen()
 
-# board = board_class()
-# board = board_class(0, 0, 0, 9, 9, 9)
+# board = board_class((0, 0), (0, 0), (9, 9))
 
-
-# board.move_carrier(-175, -75)
-# board.move_carrier(-175, 100)
+# board.pickup_acion()
+# board.move_carrier(0, 0)
+# board.move_carrier(9, 5)
 
 # board.move_x_axis("left")
 # board.move_y_axis("down")
 # board.move_x_axis("left")
 # board.write_info(1, 10, 0)
+
 # turtle.done()
 
-# board.move_y_axis("up")
-# board.move_y_axis("up")
-# board.move_y_axis("up")
-# board.move_y_axis("up")
-# board.move_y_axis("up")
-# board.move_y_axis("up")
-# board.pickup_acion()
-# board.move_x_axis("left")
-# board.move_x_axis("left")
-# board.move_x_axis("left")
-# board.pickup_acion()
-
-# board.move_x_axis("right")
-# board.move_x_axis("right")
-# board.move_x_axis("right")
-
-# board.move_y_axis("down")
-# board.move_y_axis("down")
-# board.move_y_axis("down")
-# board.move_y_axis("down")
-# board.move_y_axis("down")
-# board.move_y_axis("down")
-# board.move_y_axis("down")
-# board.move_y_axis("down")
-
-# board.move_x_axis("right")
-# board.move_x_axis("right")
-# board.move_x_axis("right")
-# board.move_x_axis("right")
-# board.move_x_axis("right")
-
-# board.drop_off_action()
 
