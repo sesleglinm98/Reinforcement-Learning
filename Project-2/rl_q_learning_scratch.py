@@ -20,6 +20,13 @@ class Q_Learning():
     def random_position(self):
         self.agent_position = (random.randint(0, 9), random.randint(0, 9))
         # self.evil_man_position = (random.randint(0, 9), random.randint(0, 9))
+        numbers_x = list(range(0,10))
+        numbers_y = list(range(0,10))
+
+        numbers_x.remove(self.agent_position[0])
+        numbers_y.remove(self.agent_position[1])
+
+        self.evil_man_position = (random.choice(numbers_x), random.choice(numbers_y))
 
         # self.item_drop_off = (random.randint(0, 9), random.randint(0, 9))
 
@@ -42,16 +49,16 @@ class Q_Learning():
         alpha = 0.1    # learning rate
         gamma = 0.6
 
-        for i in range(50050):
+        for i in range(200050):
             if i % 100 == 0:
                 print("i: ", i)
             # if i == 5000:
             #     self.epsilon = 0.8
             self.epsilon = 0.2
-            if i >= 50000:
+            if i >= 200000:
                 self.epsilon = 0.2
-            if i == 50000:
-                np.save("C:/Users/sesle/Desktop/Workspace/ReinforcementLearning/Github/Project-2/q_table_100bin.npy", self.q_table) # egitilen q_table save edilir
+            if i == 200000:
+                np.save("C:/Users/sesle/Desktop/Workspace/ReinforcementLearning/Github/Project-2/q_table_200bin.npy", self.q_table) # egitilen q_table save edilir
                 # self.board = board_class(self.agent_position, self.evil_man_position, self.castle_position)
             if self.randomize:
                 self.random_position()
@@ -59,7 +66,7 @@ class Q_Learning():
                 self.field = Field(self.size, self.agent_position, self.evil_man_position, self.castle_position)
             else:
                 self.field = Field(self.size, self.agent_position, self.evil_man_position, self.castle_position)  # her dongunun basinda butun herseyi sifirlamak icin field objesi bastan olusturulur
-            if i >= 50000:
+            if i >= 200000:
                 self.board = board_class(self.agent_position, self.evil_man_position, self.castle_position)      
             # self.board.make_action(0, 0, self.agent_position, self.evil_man_position, self.castle_position)
             
@@ -82,19 +89,21 @@ class Q_Learning():
                 
                 # q-learning'in ogrenme hesabi su sekilde yapilir -> Q[state, action] = (1 - alpha) * Q[state, action] + alpha * (reward + gamma * max(Q[new_state]) - Q[state, action])
                 new_state = self.field.get_state()
-                new_state_max = np.max(self.q_table[new_state])
-
+                try:
+                    new_state_max = np.max(self.q_table[new_state])
+                except:
+                    print("len q_table: ", len(self.q_table), "new_state: ", new_state)
                 self.q_table[state, action] = (1 - alpha) * self.q_table[state, action] + alpha*(reward + gamma * new_state_max - self.q_table[state, action])
 
                 if step_number % 30000 == 0:
                     print("step_number: ", step_number)
                 # if i % 3 == 0 and i != 0:
-                if i >= 50000:
+                if i >= 200000:
                     print("i: ", i, "step_number: ", step_number)
                     print("agent coordinates: ", self.field.agent_position)
                     print("evil coordinates: ", self.field.evil_man_position)
                     self.evaluate_rl_while_training(i, step_number, action, movement)
-            if i>= 50000:
+            if i>= 200000:
                 self.board.reset()
             # board_class.reset()
 

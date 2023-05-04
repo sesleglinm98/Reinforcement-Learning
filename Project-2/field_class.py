@@ -10,7 +10,7 @@ class Field:
 
     def get_number_of_states(self):  # toplam kac tane durumun oldugunu dondurur
         # ajan ve kotu adam farkli pozisyonlarda olabilir, castle'ın pozisyonu fix bi yerde olucak
-        return self.size*self.size*self.size*self.size*self.size*self.size*2*2  # 2 tane reward icin eklendi
+        return self.size*self.size*self.size*self.size*self.size*self.size*2*2 + 1  # 2 tane reward icin eklendi, +1 q_tableda size hatasi veriyordu cozebilir diye ekledim
         # carpi 2 odulun alinip alinmama durumu icin
         # carpi 2 kotu adamin olu olup olmama durumu icin
 
