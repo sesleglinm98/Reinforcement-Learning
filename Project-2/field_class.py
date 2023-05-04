@@ -10,7 +10,7 @@ class Field:
 
     def get_number_of_states(self):  # toplam kac tane durumun oldugunu dondurur
         # ajan ve kotu adam farkli pozisyonlarda olabilir, castle'ın pozisyonu fix bi yerde olucak
-        return self.size*self.size*self.size*self.size*2*2
+        return self.size*self.size*self.size*self.size*self.size*self.size*2*2  # 2 tane reward icin eklendi
         # carpi 2 odulun alinip alinmama durumu icin
         # carpi 2 kotu adamin olu olup olmama durumu icin
 
@@ -18,10 +18,12 @@ class Field:
         # burada yapilan islem belli bir zamanda hangi durumda oldugunun hesaplanmasidir
         # durumun hesaplanmasi bire bir mapping gibi dusunulebilir, her bir durum her bir sayi ile ifade ediliyor
         # bu mapping islemi icinde asagidaki gibi bir hesaplama yapiliyor ve boylece her durumun bir sayi karsiligi oluyor
-        state = self.agent_position[0] * self.size * self.size * self.size * 2 * 2
-        state = state + self.agent_position[1] * self.size * self.size * 2 * 2
-        state = state + self.evil_man_position[0] * self.size * 2 * 2
-        state = state + self.evil_man_position[1] * 2 * 2
+        state = self.agent_position[0] * self.size * self.size * self.size * self.size * self.size * 2 * 2
+        state = state + self.agent_position[1] * self.size * self.size * self.size * self.size * 2 * 2
+        state = state + self.evil_man_position[0] * self.size * self.size * self.size * 2 * 2
+        state = state + self.evil_man_position[1] * self.size * self.size * 2 * 2
+        state = state + self.reward_position[0] * self.size * 2 * 2
+        state = state + self.reward_position[1] * 2 * 2
         if self.evil_man_dead:
             state = state + 3
         else:

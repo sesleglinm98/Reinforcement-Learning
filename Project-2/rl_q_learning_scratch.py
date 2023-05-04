@@ -42,31 +42,25 @@ class Q_Learning():
         alpha = 0.1    # learning rate
         gamma = 0.6
 
-        for i in range(100050):
+        for i in range(50050):
             if i % 100 == 0:
                 print("i: ", i)
-            if i == 5000:
-                self.epsilon = 0.8
-            if i == 10000:
-                self.epsilon = 0.7
-            if i == 15000:
-                self.epsilon = 0.6
-            if i == 20000:
-                self.epsilon = 0.5
-            if i == 25000:
-                self.epsilon = 0.4
-            if i >= 100000:
+            # if i == 5000:
+            #     self.epsilon = 0.8
+            self.epsilon = 0.2
+            if i >= 50000:
                 self.epsilon = 0.2
-                self.board = board_class(self.agent_position, self.evil_man_position, self.castle_position)
-            if i == 100000:
+            if i == 50000:
                 np.save("C:/Users/sesle/Desktop/Workspace/ReinforcementLearning/Github/Project-2/q_table_100bin.npy", self.q_table) # egitilen q_table save edilir
+                # self.board = board_class(self.agent_position, self.evil_man_position, self.castle_position)
             if self.randomize:
                 self.random_position()
                 # print("item_start:: ", self.item_start)
                 self.field = Field(self.size, self.agent_position, self.evil_man_position, self.castle_position)
             else:
                 self.field = Field(self.size, self.agent_position, self.evil_man_position, self.castle_position)  # her dongunun basinda butun herseyi sifirlamak icin field objesi bastan olusturulur
-            # self.board = board_class(self.agent_position, self.evil_man_position, self.castle_position)      
+            if i >= 50000:
+                self.board = board_class(self.agent_position, self.evil_man_position, self.castle_position)      
             # self.board.make_action(0, 0, self.agent_position, self.evil_man_position, self.castle_position)
             
             done =  False
@@ -95,12 +89,14 @@ class Q_Learning():
                 if step_number % 30000 == 0:
                     print("step_number: ", step_number)
                 # if i % 3 == 0 and i != 0:
-                if i >= 100000:
+                if i >= 50000:
                     print("i: ", i, "step_number: ", step_number)
                     print("agent coordinates: ", self.field.agent_position)
                     print("evil coordinates: ", self.field.evil_man_position)
                     self.evaluate_rl_while_training(i, step_number, action, movement)
-            # self.board.reset()
+            if i>= 50000:
+                self.board.reset()
+            # board_class.reset()
 
 
     def evaluate_rl_while_training(self, i, step_number, action, movement):  
