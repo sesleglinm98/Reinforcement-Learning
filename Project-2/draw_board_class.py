@@ -46,12 +46,12 @@ class board_class():
 
         # adding images on board
         path = "C:/Users/sesle/Desktop/Workspace/ReinforcementLearning/Github/Project-2/draw_board_gifs/"
-        turtle.addshape(path + "edited-apple.gif")
-        turtle.addshape(path + "funny-cat-hug-edited.gif")
-        turtle.addshape(path + "home2.gif")
-        turtle.addshape(path + "applecatrun-apple-cat.gif")
+        turtle.addshape(path + "edited-diamond.gif")
+        turtle.addshape(path + "edited-hero.gif")
+        turtle.addshape(path + "castle.gif")
+        turtle.addshape(path + "edited-diamonded-hero.gif")
         turtle.addshape(path + "winner-home.gif")
-        turtle.addshape(path + "edited-cat-dance.gif")
+        turtle.addshape(path + "edited-dragon.gif")
 
         # animation frames
         # frame_path = "C:/Users/sesle/Desktop/Workspace/ReinforcementLearning/Github/q-learning/animation/funny-cat-frames/"
@@ -83,28 +83,28 @@ class board_class():
                 turtle.end_fill()
 
         self.agent_turtle.speed(2)
-        self.agent_turtle.shape(path + "funny-cat-hug-edited.gif")
+        self.agent_turtle.shape(path + "edited-hero.gif")
         self.agent_turtle.color('black')
         self.agent_turtle.penup()
         self.agent_turtle.goto(self.agent_x, self.agent_y)
         self.agent_turtle.shapesize(2, 2)
 
         self.evil_man_turtle.speed(0)
-        self.evil_man_turtle.shape(path + "edited-cat-dance.gif")
+        self.evil_man_turtle.shape(path + "edited-dragon.gif")
         self.evil_man_turtle.color('red')
         self.evil_man_turtle.penup()
         self.evil_man_turtle.goto(self.evil_man_x, self.evil_man_y)
         self.evil_man_turtle.shapesize(2, 2)
         
         self.castle_turtle.speed(0)
-        self.castle_turtle.shape(path + "home2.gif")
+        self.castle_turtle.shape(path + "castle.gif")
         self.castle_turtle.color('green')
         self.castle_turtle.penup()
         self.castle_turtle.goto(self.castle_x, self.castle_y)
         self.castle_turtle.shapesize(2, 2)
 
         self.reward_turtle.speed(0)
-        self.reward_turtle.shape(path + "edited-apple.gif")
+        self.reward_turtle.shape(path + "edited-diamond.gif")
         self.reward_turtle.color('green')
         self.reward_turtle.penup()
         self.reward_turtle.goto(self.reward_x, self.reward_y)
@@ -113,7 +113,6 @@ class board_class():
 
         self.reward_taken = False # itemin alinip alinmadigi tutulur
         self.evil_man_dead = False  # kotu adamin olup olmedigi tutulur
-
 
         turtle.update() # tracer ile animasyon devre disi birakildigi icin, ekranin guncellenmesini saglar
         turtle.tracer(1)
@@ -139,12 +138,12 @@ class board_class():
             self.reward_turtle.showturtle()
         elif movement == 2:  # reward alinmasi
             self.reward_turtle.hideturtle()
-            self.agent_turtle.shape(path + "applecatrun-apple-cat.gif")
+            self.agent_turtle.shape(path + "edited-diamonded-hero.gif")
         elif movement == 3:  # rewardin sahaya birakilmasi
             self.reward_turtle.setx(self.agent_x)
             self.reward_turtle.sety(self.agent_y)
             self.reward_turtle.showturtle()
-            self.agent_turtle.shape(path + "funny-cat-hug-edited.gif")
+            self.agent_turtle.shape(path + "edited-hero.gif")
         elif movement == 4:  # basarili reward castle'a konmasi
             print("wonnnn")
             self.write_turtle.setposition(0, 350)
@@ -153,7 +152,6 @@ class board_class():
             # self.item_turtle.setx(self.started_item_pos_x)
             # self.item_turtle.sety(self.started_item_pos_y)
             self.reward_turtle.shapesize(2, 2)
-        # time.sleep(1)
 
     def move_x_axis(self, direction):
         if direction == "right":
@@ -174,26 +172,6 @@ class board_class():
             self.agent_turtle.sety(self.agent_turtle.position()[1] - 50)
             if self.reward_taken: # item alinmis ise hareket etmesi icin
                 self.reward_turtle.sety(self.reward_turtle.position()[1] - 50)
-
-    # def pickup_acion(self):
-    #     if self.reward_turtle.position() == self.agent_turtle.position():
-    #         # self.item_turtle.shapesize(1, 1)
-    #         path = "C:/Users/sesle/Desktop/Workspace/ReinforcementLearning/Scratch-Tutorials/create-your-rl-environment/"
-    #         self.carrier_turtle.shape(path + "applecatrun-apple-cat.gif")
-    #         # self.picked_up_animation()
-    #         self.reward_turtle.hideturtle()
-
-    # def drop_off_action(self):
-    #     path = "C:/Users/sesle/Desktop/Workspace/ReinforcementLearning/Scratch-Tutorials/create-your-rl-environment/"
-    #     if self.reward_turtle.position() == self.castle_turtle.position(): # itemin droppoff bolgesinde birakilmasi durumu
-    #         self.agent_turtle.hideturtle()
-    #         self.reward_turtle.hideturtle()
-    #         self.castle_turtle.shape(path + "winner-home.gif")
-            # turtle.done() # dikkat et bunun cikarilmasi gerekebilir
-        # else:
-        #     # self.item_turtle.shapesize(2, 2)
-        #     self.agent_turtle.shape(path + "funny-cat-hug-edited.gif")
-        #     self.reward_turtle.showturtle()
 
     def picked_up_animation(self):
         frame_path = "C:/Users/sesle/Desktop/Workspace/ReinforcementLearning/Github/q-learning/animation/funny-cat-frames/"
@@ -233,18 +211,3 @@ class board_class():
 
     def reset(self):
         turtle.resetscreen()
-
-# board = board_class((0, 0), (0, 0), (9, 9))
-
-# board.pickup_acion()
-# board.move_carrier(0, 0)
-# board.move_carrier(9, 5)
-
-# board.move_x_axis("left")
-# board.move_y_axis("down")
-# board.move_x_axis("left")
-# board.write_info(1, 10, 0)
-
-# turtle.done()
-
-
