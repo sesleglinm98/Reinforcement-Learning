@@ -4,15 +4,11 @@ import time
 class board_class():
 
     def __init__(self, agent_position, evil_man_position, castle_position):
-    # def __init__(self):
         board_size = 10
         self.square_size = 50
         self.start_x = -250
         self.start_y = 250
-
         self.item_size = 40
-        carrier_size = 40
-        drop_region_size = 40
 
         # position[0]=0 -> -250 + 25  -> start_x + square_size/2 + 0 * square_size
         # position[0]=1 -> -250 + 75  -> start_x + square_size/2 + 1 * square_size
@@ -48,20 +44,11 @@ class board_class():
         path = "C:/Users/sesle/Desktop/Workspace/ReinforcementLearning/Github/Project-2/draw_board_gifs/"
         turtle.addshape(path + "edited-diamond.gif")
         turtle.addshape(path + "edited-hero.gif")
-        turtle.addshape(path + "castle.gif")
+        turtle.addshape(path + "edited-castle_3.gif")
         turtle.addshape(path + "edited-diamonded-hero.gif")
-        turtle.addshape(path + "winner-home.gif")
+        turtle.addshape(path + "edited-winner-castle.gif")
         turtle.addshape(path + "edited-dragon.gif")
-
-        # animation frames
-        # frame_path = "C:/Users/sesle/Desktop/Workspace/ReinforcementLearning/Github/q-learning/animation/funny-cat-frames/"
-        # turtle.addshape(frame_path + "frame_0.gif")
-        # turtle.addshape(frame_path + "frame_1.gif")
-        # turtle.addshape(frame_path + "frame_2.gif")
-        # turtle.addshape(frame_path + "frame_3.gif")
-        # turtle.addshape(frame_path + "frame_4.gif")
-
-        self.animation_counter = 0
+        turtle.addshape(path + "attacked-edited-dragon.gif")
 
         turtle.speed(0)  # cizim hizini ayarlar, 0 en hizlisi
         turtle.hideturtle() # cizim okunu gorunmez yapar
@@ -97,7 +84,7 @@ class board_class():
         self.evil_man_turtle.shapesize(2, 2)
         
         self.castle_turtle.speed(0)
-        self.castle_turtle.shape(path + "castle.gif")
+        self.castle_turtle.shape(path + "edited-castle_3.gif")
         self.castle_turtle.color('green')
         self.castle_turtle.penup()
         self.castle_turtle.goto(self.castle_x, self.castle_y)
@@ -134,6 +121,8 @@ class board_class():
             self.castle_turtle.setx(self.castle_x)
             self.castle_turtle.sety(self.castle_y)
         elif movement == 1:  # evil oldurulmesi
+            self.evil_man_turtle.shape(path + "attacked-edited-dragon.gif")
+            time.sleep(1)
             self.evil_man_turtle.hideturtle()
             self.reward_turtle.showturtle()
         elif movement == 2:  # reward alinmasi
@@ -148,10 +137,9 @@ class board_class():
             print("wonnnn")
             self.write_turtle.setposition(0, 350)
             self.write_turtle.write("WON", align="center", font=('Courier', 24, 'normal'))
-            time.sleep(1)
-            # self.item_turtle.setx(self.started_item_pos_x)
-            # self.item_turtle.sety(self.started_item_pos_y)
-            self.reward_turtle.shapesize(2, 2)
+            self.castle_turtle.shape(path + "edited-winner-castle.gif")
+            time.sleep(3)
+            self.reset()
 
     def move_x_axis(self, direction):
         if direction == "right":
@@ -173,17 +161,7 @@ class board_class():
             if self.reward_taken: # item alinmis ise hareket etmesi icin
                 self.reward_turtle.sety(self.reward_turtle.position()[1] - 50)
 
-    def picked_up_animation(self):
-        frame_path = "C:/Users/sesle/Desktop/Workspace/ReinforcementLearning/Github/q-learning/animation/funny-cat-frames/"
-        cnt = self.animation_counter
-        self.agent_turtle.shape(frame_path + "frame_" + str(cnt) + ".gif")
-        self.animation_counter += 1
-        if self.animation_counter == 4:
-            self.animation_counter = 0
-
     def write_info(self, iteration, step, action):
-        # self.score.write("Hit: {}   Missed: {}".format(self.hit, self.miss), align='center', font=('Courier', 24, 'normal'))
-        # turtle.backward((turtle.getscreen().window_width() / 2) - 10)
         self.write_turtle.clear()
         self.write_turtle.penup()
         self.write_turtle.setposition(0, 300)

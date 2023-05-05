@@ -45,19 +45,19 @@ class Q_Learning():
         alpha = 0.1    # learning rate
         gamma = 0.6
 
-        for i in range(1050):
+        for i in range(100000):
             if i % 100 == 0:
-                print("i: ", i)
-            if i == 1000:
-                np.save("C:/Users/sesle/Desktop/Workspace/ReinforcementLearning/Github/Project-2/q_table_10bin.npy", self.q_table) # egitilen q_table save edilir
+                print("iteration: ", i)
+
             if self.randomize:
                 self.random_position()
                 self.field = Field(self.size, self.agent_position, self.evil_man_position, self.castle_position)
             else:
                 self.field = Field(self.size, self.agent_position, self.evil_man_position, self.castle_position)  # her dongunun basinda butun herseyi sifirlamak icin field objesi bastan olusturulur
-            if i >= 1000:
-                self.epsilon = 0.2
-                self.board = board_class(self.agent_position, self.evil_man_position, self.castle_position)      
+            
+            if i % 2000 == 0 and i != 0:
+                self.board = board_class(self.agent_position, self.evil_man_position, self.castle_position)
+
             done =  False
             step_number = 0  # bir olayi bitirmek icin kac aksiyon alindigini tutar
             while not done:
@@ -80,16 +80,23 @@ class Q_Learning():
 
                 self.q_table[state, action] = (1 - alpha) * self.q_table[state, action] + alpha*(reward + gamma * new_state_max - self.q_table[state, action])
 
-                if step_number % 30000 == 0:
-                    print("step_number: ", step_number)
-                # if i % 3 == 0 and i != 0:
-                if i >= 1000:
+                # evaluation model while training
+                if i % 2000 == 0 and i != 0:
                     print("i: ", i, "step_number: ", step_number)
-                    self.evaluate_rl_while_training(i, step_number, action, movement)
-            if i>= 1000:
-                self.board.reset()
+                    self.evaluation_in_board(i, step_number, action, movement)
+                    if step_number >= 150:
+                        self.board.reset()
+                        done = True
 
-    def evaluate_rl_while_training(self, i, step_number, action, movement):  
+                # save the model
+                if i == 2000:
+                    np.save("C:/Users/sesle/Desktop/Workspace/ReinforcementLearning/Github/Project-2/q_table_2bin.npy", self.q_table)
+                elif i == 10000:
+                    np.save("C:/Users/sesle/Desktop/Workspace/ReinforcementLearning/Github/Project-2/q_table_10bin.npy", self.q_table)
+                elif i == 50000:
+                    np.save("C:/Users/sesle/Desktop/Workspace/ReinforcementLearning/Github/Project-2/q_table_50bin.npy", self.q_table)
+
+    def evaluation_in_board(self, i, step_number, action, movement):
         self.board.write_info(i, step_number, action)
         self.board.make_action(action, movement, self.field.agent_position, self.field.evil_man_position, self.field.castle_position)
 
@@ -117,13 +124,13 @@ class Q_Learning():
                     action = np.argmax(trained_q_table[state])
             else:
                 action = np.argmax(trained_q_table[state])
-                if step_number >= 130:  # algoritmanin takili kalmasini onlemek icin, yoksa sonsuz kadar hep ayni hareketi tekrarliyor
+                if step_number >= 150:  # algoritmanin takili kalmasini onlemek icin, yoksa sonsuz kadar hep ayni hareketi tekrarliyor
                     print("fail")
                     done = True
 
             reward, movement, done = self.field.make_action(action)
 
-            self.evaluate_rl_while_training(i, step_number, action, movement)
+            self.evaluation_in_board(i, step_number, action, movement)
             time.sleep(0.1)
 
         self.board.reset()
@@ -136,32 +143,30 @@ class Q_Learning():
         action = 0
         for i in range(3):
             reward, movement, done = self.field.make_action(action)
-            self.evaluate_rl_while_training()
+            self.evaluation_in_board()
         
         action = 3
         for i in range(5):
             reward, movement, done = self.field.make_action(action)
-            self.evaluate_rl_while_training()
+            self.evaluation_in_board()
 
         action = 4
         reward, movement, done = self.field.make_action(action)
-        self.evaluate_rl_while_training()
+        self.evaluation_in_board()
 
         action = 0
         reward, movement, done = self.field.make_action(action)
-        self.evaluate_rl_while_training()
+        self.evaluation_in_board()
 
         action = 5
         reward, movement, done = self.field.make_action(action)
-        self.evaluate_rl_while_training()
+        self.evaluation_in_board()
 
         action = 3
         for i in range(7):
             reward, movement, done = self.field.make_action(action)
-            self.evaluate_rl_while_training()
+            self.evaluation_in_board()
 
         action = 6
         reward, movement, done = self.field.make_action(action)
-        self.evaluate_rl_while_training()
-
-        turtle.done()
+        self.evaluation_in_board()
