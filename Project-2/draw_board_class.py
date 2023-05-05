@@ -50,9 +50,9 @@ class board_class():
         turtle.addshape(path + "edited-dragon.gif")
         turtle.addshape(path + "attacked-edited-dragon.gif")
 
-        turtle.speed(0)  # cizim hizini ayarlar, 0 en hizlisi
-        turtle.hideturtle() # cizim okunu gorunmez yapar
-        turtle.tracer(0) # bunun ile animasyon devre disi birakilir, bu olmadiginda tum cizimler animasyon seklinde cizilir
+        turtle.speed(0)  # sets the drawing speed, 0 is the fastest
+        turtle.hideturtle() # makes the drawing arrow invisible
+        turtle.tracer(0) # animation is disabled
 
         for i in range(board_size):
             for j in range(board_size):
@@ -98,10 +98,10 @@ class board_class():
         self.reward_turtle.shapesize(2, 2)
         self.reward_turtle.hideturtle()
 
-        self.reward_taken = False # itemin alinip alinmadigi tutulur
-        self.evil_man_dead = False  # kotu adamin olup olmedigi tutulur
+        self.reward_taken = False
+        self.evil_man_dead = False
 
-        turtle.update() # tracer ile animasyon devre disi birakildigi icin, ekranin guncellenmesini saglar
+        turtle.update() # screen is updated
         turtle.tracer(1)
 
     def make_action(self, action, movement, agent_position, evil_man_position, castle_position):
@@ -120,20 +120,20 @@ class board_class():
             self.evil_man_turtle.sety(self.evil_man_y)
             self.castle_turtle.setx(self.castle_x)
             self.castle_turtle.sety(self.castle_y)
-        elif movement == 1:  # evil oldurulmesi
+        elif movement == 1:  # evil was killed
             self.evil_man_turtle.shape(path + "attacked-edited-dragon.gif")
             time.sleep(1)
             self.evil_man_turtle.hideturtle()
             self.reward_turtle.showturtle()
-        elif movement == 2:  # reward alinmasi
+        elif movement == 2:  # reward received
             self.reward_turtle.hideturtle()
             self.agent_turtle.shape(path + "edited-diamonded-hero.gif")
-        elif movement == 3:  # rewardin sahaya birakilmasi
+        elif movement == 3:  # releasing the reward on the field
             self.reward_turtle.setx(self.agent_x)
             self.reward_turtle.sety(self.agent_y)
             self.reward_turtle.showturtle()
             self.agent_turtle.shape(path + "edited-hero.gif")
-        elif movement == 4:  # basarili reward castle'a konmasi
+        elif movement == 4:  # reward successfully placed in castle
             print("wonnnn")
             self.write_turtle.setposition(0, 350)
             self.write_turtle.write("WON", align="center", font=('Courier', 24, 'normal'))
@@ -144,21 +144,21 @@ class board_class():
     def move_x_axis(self, direction):
         if direction == "right":
             self.agent_turtle.setx(self.agent_turtle.position()[0] + 50)
-            if self.reward_taken: # item alinmis ise carrier ile beraber hareket etmesi icin
+            if self.reward_taken: # if the item is taken, it moves with the agent
                 self.reward_turtle.setx(self.reward_turtle.position()[0] + 50)
         elif direction == "left":
             self.agent_turtle.setx(self.agent_turtle.position()[0] - 50)
-            if self.reward_taken: # item alinmis ise carrier ile beraber hareket etmesi icin
+            if self.reward_taken: # if the item is taken, it moves with the agent
                 self.reward_turtle.setx(self.reward_turtle.position()[0] - 50)
                 
     def move_y_axis(self, direction):
         if direction == "up":
             self.agent_turtle.sety(self.agent_turtle.position()[1] + 50)
-            if self.reward_taken: # item alinmis ise hareket etmesi icin
+            if self.reward_taken: # if the item is taken, it moves with the agent
                 self.reward_turtle.sety(self.reward_turtle.position()[1] + 50)
         elif direction == "down":
             self.agent_turtle.sety(self.agent_turtle.position()[1] - 50)
-            if self.reward_taken: # item alinmis ise hareket etmesi icin
+            if self.reward_taken: # if the item is taken, it moves with the agent
                 self.reward_turtle.sety(self.reward_turtle.position()[1] - 50)
 
     def write_info(self, iteration, step, action):
@@ -177,7 +177,7 @@ class board_class():
         elif action == 3:
             str_action = "right"
         elif action == 4:
-            str_action = "pull trigger"
+            str_action = "attack"
         elif action == 5:
             str_action = "pickup"
         elif action == 6:

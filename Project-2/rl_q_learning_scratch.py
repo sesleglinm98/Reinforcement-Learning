@@ -5,8 +5,6 @@ import numpy as np
 import time
 import random
 
-import turtle
-
 class Q_Learning():
 
     def __init__(self, size, agent_position, evil_man_position, castle_position, randomize):
@@ -35,15 +33,12 @@ class Q_Learning():
         number_of_states = self.field.get_number_of_states()
         number_of_actions = 7
 
-        # q_table ogrenmenin gerceklestigi yerdir, buradaki her bir durum-aksiyon elemani icin agirlik hesaplanir
-        self.q_table = np.zeros((number_of_states, number_of_actions))  # butun durumlar ve bu durumlara karsilik aksiyonlarin sayisi kadar
-                                                                # boyutta bir q_table olusturulur, butun elemanlari 0 ile doldurulur
+        # q_table is where the learning happens
+        self.q_table = np.zeros((number_of_states, number_of_actions))  # q_table initialization
 
-        self.epsilon = 0.2  # explore ve exploit'in secimi icin probability degeridir
-                    # 0.1 ihtimal ile explore secilirse random bir secim yapar ve onceden gidilmeyen yollari acmaya yarar
-                    # kalan ihtimallerde ise exploit secilmis olur, o anki duruma gore aksiyonlardan ek yuksek reward-degeri alinir, yani en yuksek rewardli aksiyon secilmis olur
+        self.epsilon = 0.2  # exploration and exploitation probability value
         alpha = 0.1    # learning rate
-        gamma = 0.6
+        gamma = 0.6    # discount factor
 
         for i in range(100000):
             if i % 100 == 0:
@@ -53,28 +48,25 @@ class Q_Learning():
                 self.random_position()
                 self.field = Field(self.size, self.agent_position, self.evil_man_position, self.castle_position)
             else:
-                self.field = Field(self.size, self.agent_position, self.evil_man_position, self.castle_position)  # her dongunun basinda butun herseyi sifirlamak icin field objesi bastan olusturulur
+                self.field = Field(self.size, self.agent_position, self.evil_man_position, self.castle_position)
             
             if i % 2000 == 0 and i != 0:
                 self.board = board_class(self.agent_position, self.evil_man_position, self.castle_position)
 
             done =  False
-            step_number = 0  # bir olayi bitirmek icin kac aksiyon alindigini tutar
+            step_number = 0  # number of actions to end an event
             while not done:
                 step_number += 1
                 state = self.field.get_state()
-                if random.uniform(0, 1) < self.epsilon:  # 0-1 arasi random sayi secilir, epsilon degeri ile kiyaslanir
-                    action = random.randint(0, 6)  # random bir aksiyon secilir
+                if random.uniform(0, 1) < self.epsilon:  # random number between 0-1 is selected and compared with the epsilon value.
+                    action = random.randint(0, 6)  # random action is chosen
 
                 else:
-                    action = np.argmax(self.q_table[state])  # bu ifade su demektir: q_table'dan o anki state column degerlerini al, yani o state'in aksiyon degerlerini al
-                                                        # ilk dongu icin q_table[state] ifadesi = [0, 0, 0, 0, 0, 0] dizisini dondurur, yani her aksiyonun degerleridir
-                                                        # np.argmax ile bu degerlerden en buyuk olan secilir ve o degerin aksiyonu alinir
-                                                        # bu degerler her iterasyonda asagida guncellenecektir, boylece her seferinde optimum aksiyonlar secilmeye calisilir
+                    action = np.argmax(self.q_table[state])  # the highest value action of the state is selected from q_table
 
                 reward, movement, done = self.field.make_action(action)
                 
-                # q-learning'in ogrenme hesabi su sekilde yapilir -> Q[state, action] = (1 - alpha) * Q[state, action] + alpha * (reward + gamma * max(Q[new_state]) - Q[state, action])
+                # q-learning formula -> Q[state, action] = (1 - alpha) * Q[state, action] + alpha * (reward + gamma * max(Q[new_state]) - Q[state, action])
                 new_state = self.field.get_state()
                 new_state_max = np.max(self.q_table[new_state])
 
@@ -109,7 +101,7 @@ class Q_Learning():
         self.board = board_class(self.agent_position, self.evil_man_position, self.castle_position)
         
         done = False
-        step_number = 0  # olayi kac adimda tamamladigini tutar
+        step_number = 0
         i = 0
 
         epsilon = 0.2
@@ -118,13 +110,13 @@ class Q_Learning():
             state = self.field.get_state()
 
             if random_movement:
-                if random.uniform(0, 1) < epsilon:  # 0-1 arasi random sayi secilir, epsilon degeri ile kiyaslanir
-                    action = random.randint(0, 6)  # random bir aksiyon secilir
+                if random.uniform(0, 1) < epsilon:
+                    action = random.randint(0, 6)
                 else:
                     action = np.argmax(trained_q_table[state])
             else:
                 action = np.argmax(trained_q_table[state])
-                if step_number >= 150:  # algoritmanin takili kalmasini onlemek icin, yoksa sonsuz kadar hep ayni hareketi tekrarliyor
+                if step_number >= 150:  # terminates event
                     print("fail")
                     done = True
 
@@ -137,7 +129,7 @@ class Q_Learning():
         return step_number
 
     def manual_test(self):
-        self.field = Field(self.size, self.agent_position, self.evil_man_position, self.castle_position)  # her dongunun basinda butun herseyi sifirlamak icin field objesi bastan olusturulur
+        self.field = Field(self.size, self.agent_position, self.evil_man_position, self.castle_position)
         self.board = board_class(self.agent_position, self.evil_man_position, self.castle_position)      
 
         action = 0
