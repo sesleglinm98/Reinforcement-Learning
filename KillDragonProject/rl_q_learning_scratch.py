@@ -40,7 +40,7 @@ class Q_Learning():
         alpha = 0.1    # learning rate
         gamma = 0.6    # discount factor
 
-        for i in range(100000):
+        for i in range(510000):
             if i % 100 == 0:
                 print("iteration: ", i)
 
@@ -50,7 +50,7 @@ class Q_Learning():
             else:
                 self.field = Field(self.size, self.agent_position, self.evil_man_position, self.castle_position)
             
-            if i % 2000 == 0 and i != 0:
+            if i % 50000 == 0 and i != 0:
                 self.board = board_class(self.agent_position, self.evil_man_position, self.castle_position)
 
             done =  False
@@ -73,20 +73,28 @@ class Q_Learning():
                 self.q_table[state, action] = (1 - alpha) * self.q_table[state, action] + alpha*(reward + gamma * new_state_max - self.q_table[state, action])
 
                 # evaluation model while training
-                if i % 2000 == 0 and i != 0:
+                if i % 50000 == 0 and i != 0:
                     print("i: ", i, "step_number: ", step_number)
                     self.evaluation_in_board(i, step_number, action, movement)
                     if step_number >= 150:
                         self.board.reset()
                         done = True
 
-                # save the model
-                if i == 2000:
-                    np.save("C:/Users/sesle/Desktop/Workspace/ReinforcementLearning/Github/Project-2/q_table_2bin.npy", self.q_table)
-                elif i == 10000:
-                    np.save("C:/Users/sesle/Desktop/Workspace/ReinforcementLearning/Github/Project-2/q_table_10bin.npy", self.q_table)
-                elif i == 50000:
-                    np.save("C:/Users/sesle/Desktop/Workspace/ReinforcementLearning/Github/Project-2/q_table_50bin.npy", self.q_table)
+            # save the model
+            if i == 2000:
+                np.save("C:/Users/sesle/Desktop/Workspace/ReinforcementLearning/Github/Project-2/q_table_2bin.npy", self.q_table)
+            elif i == 10000:
+                np.save("C:/Users/sesle/Desktop/Workspace/ReinforcementLearning/Github/Project-2/q_table_10bin.npy", self.q_table)
+            elif i == 50000:
+                np.save("C:/Users/sesle/Desktop/Workspace/ReinforcementLearning/Github/Project-2/q_table_50bin.npy", self.q_table)
+            elif i == 100000:
+                np.save("C:/Users/sesle/Desktop/Workspace/ReinforcementLearning/Github/Project-2/q_table_100bin.npy", self.q_table)
+            elif i == 200000:
+                np.save("C:/Users/sesle/Desktop/Workspace/ReinforcementLearning/Github/Project-2/q_table_200bin.npy", self.q_table)
+            elif i == 400000:
+                np.save("C:/Users/sesle/Desktop/Workspace/ReinforcementLearning/Github/Project-2/q_table_400bin.npy", self.q_table)
+            elif i == 500000:
+                np.save("C:/Users/sesle/Desktop/Workspace/ReinforcementLearning/Github/Project-2/q_table_500bin.npy", self.q_table)
 
     def evaluation_in_board(self, i, step_number, action, movement):
         self.board.write_info(i, step_number, action)
@@ -99,12 +107,14 @@ class Q_Learning():
             self.random_position()
         self.field = Field(self.size, self.agent_position, self.evil_man_position, self.castle_position)
         self.board = board_class(self.agent_position, self.evil_man_position, self.castle_position)
+
+        time.sleep(5)
         
         done = False
         step_number = 0
-        i = 0
+        i = 500000
 
-        epsilon = 0.2
+        epsilon = 0.1
         while not done:
             step_number = step_number + 1
             state = self.field.get_state()
@@ -116,14 +126,15 @@ class Q_Learning():
                     action = np.argmax(trained_q_table[state])
             else:
                 action = np.argmax(trained_q_table[state])
-                if step_number >= 150:  # terminates event
-                    print("fail")
-                    done = True
 
             reward, movement, done = self.field.make_action(action)
 
             self.evaluation_in_board(i, step_number, action, movement)
             time.sleep(0.1)
+
+            if step_number >= 150:  # terminates event
+                print("fail")
+                done = True
 
         self.board.reset()
         return step_number
