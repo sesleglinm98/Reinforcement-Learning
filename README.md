@@ -1,4 +1,4 @@
-Reinforcement Learning Algorithm Projects
+**Reinforcement Learning Algorithm Projects**
 
 
 
