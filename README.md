@@ -1,5 +1,6 @@
 Reinforcement Learning Algorithm Projects
 
+
 CarryingAppleProject
 
 In this project, a reinforcement learning system and algorithm were designed with a field and its elements. In addition, a graphical visualization of this system was realized with the python turtle module. In the system in the project, there is an agent, a reward for this agent to receive, and an area where the reward must be left. The aim of the agent is to find the prize randomly positioned in the field and take it with him, then go to the placement area on the field and leave the prize. The learning algorithm is trained by defining rewards and punishments for each action the agent makes.
