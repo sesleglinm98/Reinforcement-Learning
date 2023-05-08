@@ -22,9 +22,14 @@ In this project, there is an agent, an enemy, an award and an area where the awa
 
 <br />
 <br />
-$~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~$ ![agent-attacked-enemy](https://user-images.githubusercontent.com/64321774/236809726-2aa0578d-4789-4b44-84a7-2fd038ff4d5f.png)
+| ![agent-attacked-enemy](https://user-images.githubusercontent.com/64321774/236809726-2aa0578d-4789-4b44-84a7-2fd038ff4d5f.png) |
+|:--:|
+| *overview of the state design of the algorithm* |
 <br />
 <br />
 <br />
 <br />
-$~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~$ ![agent-pickup-reward](https://user-images.githubusercontent.com/64321774/236809750-f3c4e997-4995-435e-b41b-4fa2f6fc43e2.png)
+| ![agent-pickup-reward](https://user-images.githubusercontent.com/64321774/236809750-f3c4e997-4995-435e-b41b-4fa2f6fc43e2.png) |
+|:--:|
+| *overview of the state design of the algorithm* |
+ $~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~$
