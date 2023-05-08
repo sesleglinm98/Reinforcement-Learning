@@ -47,5 +47,7 @@ The graphical drawing of the project is performed using the python turtle module
 In the field_class.py code, the states of the algorithm are calculated. According to these states, the q_table table of the reinforcement learning algorithm is created. In addition, rewards and penalties are calculated according to the actions taken.
 
 **rl_q_learning_scratch.py** <br />
-In the rl_q_learning_scratch.py code, the q learning algorithm is created using the numpy module. Board_class() and Field() classes are also used in the code. In addition to the Reinforcement learning training, the evaluation of the training can be done. Also, the trained models are saved with numpy.save.
+In the rl_q_learning_scratch.py code, the q learning algorithm is created using the numpy module. Board_class() and Field() classes are also used in the code. In addition to the reinforcement learning training, the evaluation of the training can be done. Also, the trained models are saved with numpy.save.
 
+**main.py** <br />
+An object of the Q_Learning class is created in the main.py code and training is started with that object. In addition, the evaluation function can be run by loading the pre-trained model.
