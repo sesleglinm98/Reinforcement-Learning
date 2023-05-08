@@ -2,19 +2,19 @@ In this project, there is an agent, an enemy, an award and an area where the awa
 
 **Rewards and Penalties**
 
-1) The more steps the agent takes, the more penalty points (-1)
-2) If the agent tries to go out of the field, penalty points are taken  (-10)
-3) If the agent hits the enemy, reward points are taken (+10)
-4) If the enemy hits the agent, penalty points are taken  (-20)
-5) If the agent attacks but fails to hit the enemy, penalty points are taken (-1)
-6) If the enemy has been killed before and the attack is made again, penalty points are taken (-1)
-7) If the agent takes the prize from the field after killing the enemy, the reward points are received (+20)
-8) If the agent drops the reward in the designated area, the reward points are taken (+20)
-9) If the agent drops the bounty in the wrong place, penalty points are taken  (-10)
-10) If the reward has already been taken and the action is pick up again, penalty points are taken  (-10)
-11) If the pick up action is taken while the agent is not above the bounty, penalty points are taken  (-10)
-12) If the drop off action is chosen before the reward is already received, penalty points will be charged  (-10)
-13) If the prize is left in a place other than the designated place, penalty points are taken (-10)
+**1)** The more steps the agent takes, the more penalty points (-1)
+**2)** If the agent tries to go out of the field, penalty points are taken  (-10)
+**3)** If the agent hits the enemy, reward points are taken (+10)
+**4)** If the enemy hits the agent, penalty points are taken  (-20)
+**5)** If the agent attacks but fails to hit the enemy, penalty points are taken (-1)
+**6)** If the enemy has been killed before and the attack is made again, penalty points are taken (-1)
+**7)** If the agent takes the prize from the field after killing the enemy, the reward points are received (+20)
+**8)** If the agent drops the reward in the designated area, the reward points are taken (+20)
+**9)** If the agent drops the bounty in the wrong place, penalty points are taken  (-10)
+**10)** If the reward has already been taken and the action is pick up again, penalty points are taken  (-10)
+**11)** If the pick up action is taken while the agent is not above the bounty, penalty points are taken  (-10)
+**12)** If the drop off action is chosen before the reward is already received, penalty points will be charged  (-10)
+**13)** If the prize is left in a place other than the designated place, penalty points are taken (-10)
 
 ![board-description_1](https://user-images.githubusercontent.com/64321774/236809039-8f14fd05-80f5-4300-bb8c-74efb154182a.png)
 
