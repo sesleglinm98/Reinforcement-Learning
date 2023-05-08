@@ -40,7 +40,7 @@ $~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~$ ***fi
 <br />
 <br />
 
-**draw_board_class.py**
+**draw_board_class.py** <br />
 The graphical drawing of the project is performed using the python turtle module in the draw_board_class.py code. Coordinate and event information is passed to the board_class class from the rl_q_learning_scratch.py code. Drawings are constantly updated according to this information transmitted.
 
  
