@@ -16,12 +16,12 @@ In this project, there is an agent, an enemy, an award and an area where the awa
 **12)** If the drop off action is chosen before the reward is already received, penalty points will be charged  (-10) <br />
 **13)** If the prize is left in a place other than the designated place, penalty points are taken (-10) <br />
 
-$~~~~~~~~~~~$ ![board-description_1](https://user-images.githubusercontent.com/64321774/236809039-8f14fd05-80f5-4300-bb8c-74efb154182a.png)
+$~~~~~~~~~~~~~~~~$ ![board-description_1](https://user-images.githubusercontent.com/64321774/236809039-8f14fd05-80f5-4300-bb8c-74efb154182a.png)
 <br />
 <br />
-$~~~~~~~~~~~$ ![agent-attacked-enemy](https://user-images.githubusercontent.com/64321774/236809726-2aa0578d-4789-4b44-84a7-2fd038ff4d5f.png)
+$~~~~~~~~~~~~~~~~~~~$ ![agent-attacked-enemy](https://user-images.githubusercontent.com/64321774/236809726-2aa0578d-4789-4b44-84a7-2fd038ff4d5f.png)
 <br />
 <br />
 <br />
 <br />
-$~~~~~~~~~~~$ ![agent-pickup-reward](https://user-images.githubusercontent.com/64321774/236809750-f3c4e997-4995-435e-b41b-4fa2f6fc43e2.png)
+$~~~~~~~~~~~~~~~~~~~$ ![agent-pickup-reward](https://user-images.githubusercontent.com/64321774/236809750-f3c4e997-4995-435e-b41b-4fa2f6fc43e2.png)
