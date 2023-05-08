@@ -1,22 +1,17 @@
-Bu projede önceki proje gibi bir satranç tahtası üzerinde kurgulanacak
-Bir ajanımız, bir kötü adam ve kale olucak
-Ajan kötü adamı tahta üzerinde bulucak ve bir kare gerisinden onu vurucak
-Daha sonra kötü adamın üzerinden düşen elması (ödülü) gidip alıcak ve kaleye bırakıcak
-Ödül kaleye bırakıldığında görev tamamlanır ve olay sonlanır
-Eğer kötü adam ajanı vurursa görev başarısız olur ve olay sonlanır
+In this project, there is an agent, an enemy, an award and an area where the award is left to be constructed on the field. The aim of the agent is to travel around the field to find the enemy and kill him. Afterwards, it is to take the prize falling from the enemy and leave it in the designated area. The agent has to complete these tasks with the least action, every action done is written as a penalty point in the learning algorithm. The agent can only kill the enemy while he is one square away, and if he comes to the square where the enemy is located without killing, the enemy will kill the agent and the mission will fail. After the agent kills the enemy, the reward appears at the enemy's location. In order to train the Reinforcement learning algorithm, specific rewards and punishments and their amount were determined for each situation.
 
-Ödüller ve Cezalar
+Rewards and Penalties
 
-1) Ajan ne kadar çok adım atarsa ceza puanı yer (-1)
-2) Ajan tahta dışına çıkmaya çalışırsa ceza puanı yer (-10)
-3) Ajan kötü adamı vurursa ödül puanı alır (+10)
-4) Kötü adam ajanı vurursa ceza puanı yer (-100)
-5) Ajan silahı ateşler fakat kötü adamı vuramazsa ceza puanı yer (-1)
-6) Ajan önceden öldürüldüyse ve yine silah ateşlenirse ceza puanı yer (-1) 
-6) Ajan kötü adamı vurduktan sonra ödülü yerden alırsa ödül puanı alır (+10)
-7) Ajan ödülü kaleye bırakırsa ödül puanı alur (+20)
-8) Ajan ödülü yanlış bir yere bırakırsa ceza puanı yer (-10)
-9) Odul onceden alinmissa ve tekrar alma eylemi yapılırsa ceza puanı yer (-10)
-10) Odulun üzerinde değilken alma eylemi yapılırsa ceza puanı yer (-10)
-11) Odul onceden alinmadan bırakma eylemi secilirse ceza puanı yer (-10)
-12) Odul kale dışında bir yere birakilirsa ceza puanı yer (-10)
+1) The more steps the agent takes, the more penalty points (-1)
+2) If the agent tries to go out of the field, penalty points are taken  (-10)
+3) If the agent hits the enemy, reward points are taken (+10)
+4) If the enemy hits the agent, penalty points are taken  (-20)
+5) If the agent attacks but fails to hit the enemy, penalty points are taken (-1)
+6) If the enemy has been killed before and the attack is made again, penalty points are taken (-1)
+7) If the agent takes the prize from the field after killing the enemy, the reward points are received (+20)
+8) If the agent drops the reward in the designated area, the reward points are taken (+20)
+9) If the agent drops the bounty in the wrong place, penalty points are taken  (-10)
+10) If the reward has already been taken and the action is pick up again, penalty points are taken  (-10)
+11) If the pick up action is taken while the agent is not above the bounty, penalty points are taken  (-10)
+12) If the drop off action is chosen before the reward is already received, penalty points will be charged  (-10)
+13) If the prize is left in a place other than the designated place, penalty points are taken (-10)
