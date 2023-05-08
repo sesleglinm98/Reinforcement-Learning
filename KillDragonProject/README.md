@@ -5,8 +5,11 @@ In this project, there is an agent, an enemy, an award and an area where the awa
 **1)** The more steps the agent takes, the more penalty points (-1)
 
 **2)** If the agent tries to go out of the field, penalty points are taken  (-10)
+
 **3)** If the agent hits the enemy, reward points are taken (+10)
+
 **4)** If the enemy hits the agent, penalty points are taken  (-20)
+
 **5)** If the agent attacks but fails to hit the enemy, penalty points are taken (-1)
 **6)** If the enemy has been killed before and the attack is made again, penalty points are taken (-1)
 **7)** If the agent takes the prize from the field after killing the enemy, the reward points are received (+20)
