@@ -18,7 +18,7 @@ In this project, there is an agent, an enemy, an award and an area where the awa
 
  $~~~~~~~~~~~~~~~~~$ ![board-description_1](https://user-images.githubusercontent.com/64321774/236818876-7691c098-fff6-474e-8d3e-1a959c1674d9.png)
  
- $~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~$ ***Overview of the Graphical Design***
+ $~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~$ ***fig 1) Overview of the Graphical Design***
  <br />
  <br />
  <br />
@@ -26,13 +26,13 @@ In this project, there is an agent, an enemy, an award and an area where the awa
 
 $~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~$ ![agent-attacked-enemy](https://user-images.githubusercontent.com/64321774/236809726-2aa0578d-4789-4b44-84a7-2fd038ff4d5f.png)
 
-$~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~$ ***Agent Attacking the Enemy***
+$~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~$ ***fig 2) Agent Attacking the Enemy***
 <br />
 <br />
 <br />
 <br />
 $~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~$ ![agent-pickup-reward](https://user-images.githubusercontent.com/64321774/236809750-f3c4e997-4995-435e-b41b-4fa2f6fc43e2.png)
 
-$~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~$ ***Agent Receiving Award***
+$~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~$ ***fig 3) Agent Receiving Award***
 
  
