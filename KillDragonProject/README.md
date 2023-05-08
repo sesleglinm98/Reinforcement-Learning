@@ -18,7 +18,7 @@ In this project, there is an agent, an enemy, an award and an area where the awa
 
  $~~~~~~~~~~~~~~~~~$ ![board-description_1](https://user-images.githubusercontent.com/64321774/236818876-7691c098-fff6-474e-8d3e-1a959c1674d9.png)
  
- $~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~$ *Overview of the State Design of the Algorithm*
+ $~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~$ *Overview of the Graphical Design*
  <br />
  <br />
  <br />
