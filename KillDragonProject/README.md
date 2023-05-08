@@ -29,7 +29,7 @@ In this project, there is an agent, an enemy, an award and an area where the awa
 <br />
 <br />
 ![agent-pickup-reward](https://user-images.githubusercontent.com/64321774/236809750-f3c4e997-4995-435e-b41b-4fa2f6fc43e2.png)
-
+{:.image-caption}
 *overview of the state design of the algorithm*
-*The caption for my image*
+
  $~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~$
