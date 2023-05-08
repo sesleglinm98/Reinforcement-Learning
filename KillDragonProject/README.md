@@ -1,6 +1,6 @@
 In this project, there is an agent, an enemy, an award and an area where the award is left to be constructed on the field. The aim of the agent is to travel around the field to find the enemy and kill him. Afterwards, it is to take the prize falling from the enemy and leave it in the designated area. The agent has to complete these tasks with the least action, every action done is written as a penalty point in the learning algorithm. The agent can only kill the enemy while he is one square away, and if he comes to the square where the enemy is located without killing, the enemy will kill the agent and the mission will fail. After the agent kills the enemy, the reward appears at the enemy's location. In order to train the Reinforcement learning algorithm, specific rewards and punishments and their amount were determined for each situation.
 
-Rewards and Penalties
+**Rewards and Penalties
 
 1) The more steps the agent takes, the more penalty points (-1)
 2) If the agent tries to go out of the field, penalty points are taken  (-10)
