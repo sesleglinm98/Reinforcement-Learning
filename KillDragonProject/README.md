@@ -51,3 +51,5 @@ In the rl_q_learning_scratch.py code, the q learning algorithm is created using 
 
 **main.py** <br />
 An object of the Q_Learning class is created in the main.py code and training is started with that object. In addition, the evaluation function can be run by loading the pre-trained model.
+
+![python-turtle-graphics-200bin-1-xuar50bn_NMIoR1aZ](https://github.com/sesleglinm98/Reinforcement-Learning/assets/64321774/33d3ce88-ea22-4ea9-854f-7f29249e88b1)
